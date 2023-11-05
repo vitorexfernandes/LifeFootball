@@ -101,6 +101,18 @@ body {
     font-size: 250%;
 }
 
+.main-container{
+    margin: 1%;
+}
+
+.league-title{
+    margin: 1%;
+    color: var(--secondColor);
+    text-decoration-color: var(--secondColor);
+    background-color: var(--mainColor);
+    font-size: 10%;
+}
+
 .game {
     margin: 1%;
     display: grid; 
@@ -141,14 +153,14 @@ body {
 
 
 .game-team-image {
-    width: 40%;
+    width: 20%;
 }
 
 
 .game-score {
     font-family: var(--mainFont);
     color: var(--mainColor);
-    font-size: 200%;
+    font-size: 150%;
     text-align: center;
 }
 

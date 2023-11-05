@@ -1,4 +1,5 @@
-const containerGames= document.getElementById("game_container");
+const containerGames= document.getElementById("mainContainer");
+console.log(containerGames);
 const selectedDateElement = document.getElementById("selectedDate");
 let currentRequests = null; // Inicialize com um valor padrão
 let maxRequests = null; // Inicialize com um valor padrão
@@ -67,8 +68,9 @@ function fetchGames(id){
 };
 
 
-function displayGames(games) {
+function displayGamesByLeague(games) {
     containerGames.innerHTML = ''; // Limpa o conteúdo anterior
+    console.log('Displaying games...');
 
     if (!Array.isArray(games)) {
         console.error('Games não é um array:', games);
@@ -77,20 +79,41 @@ function displayGames(games) {
 
     const selectedDateElementText = selectedDateElement.textContent.split(" ")[0].trim();
     const uniqueDates = new Set();
+    const gamesByLeague = {};
 
     games.forEach((game) => {
         const dateParts = game.fixture.date.split('T')[0].split('-');
         const gameDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
         const gameDateFormatted = gameDate.toLocaleDateString();
-
+        console.log('Verificando data dos games...');
         if (gameDateFormatted === selectedDateElementText) {
-            containerGames.innerHTML += createGameBox(game);
+            // Verifica se a liga já existe no objeto gamesByLeague, senão cria um novo array vazio.
+            if (!gamesByLeague[game.league.name]) {
+                gamesByLeague[game.league.name] = [];
+            }
+
+            gamesByLeague[game.league.name].push(game);
             uniqueDates.add(gameDateFormatted);
         }
     });
 
     const uniqueDatesArray = Array.from(uniqueDates);
+
+    // Agora você tem os jogos separados por liga em gamesByLeague.
+    // Você pode percorrer esse objeto e exibir os jogos de cada liga.
+
+    for (const leagueName in gamesByLeague) {
+        if (gamesByLeague.hasOwnProperty(leagueName)) {
+            containerGames.innerHTML += `
+           <p class="league-title" id="selectedDate">${leagueName}</p>
+            `;
+            gamesByLeague[leagueName].forEach((game) => {
+                containerGames.innerHTML += createGameBox(game);
+            });
+        }
+    }
 }
+
 // //
 function createGameBox(game) {
     let goalsHome = 0;
@@ -104,7 +127,8 @@ function createGameBox(game) {
     }
 
 
-    return `
+    return `    
+    <div class="game" id="game_container">
         <div class="game-box">
             <div class="game-team-home">
                 <img class="game-team-image" src="${game.teams.home.logo}" alt="Home">
@@ -122,6 +146,7 @@ function createGameBox(game) {
                 </div>
             </div>
         </div>
+     </div>
     `;
 }
 
@@ -136,7 +161,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     liveButton.addEventListener("click", function () {
         selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
-        displayGames(games);
+        displayGamesByLeague(games);
     });
 
 
@@ -146,7 +171,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (selectedDates.length > 0) 
                 {
                     selectedDateElement.textContent = selectedDates[0].toLocaleDateString() + " Games";
-                    displayGames(games);
+                    displayGamesByLeague(games);
                 }
             }
         });
