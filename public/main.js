@@ -2,10 +2,9 @@ const containerGames= document.getElementById("game_container");
 const selectedDateElement = document.getElementById("selectedDate");
 let currentRequests = null; // Inicialize com um valor padrão
 let maxRequests = null; // Inicialize com um valor padrão
-let games = null;
+let games = [];
 const dataAtual = new Date();
 const apiUrlVerify = "https://v3.football.api-sports.io/status";
-const apiUrl = "https://v3.football.api-sports.io/fixtures?league=2&season=2023";
 const apiKey = '4c6222a3bb2b31400db5c2c97fadf279';
 
 
@@ -14,8 +13,10 @@ selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
 
 
 
-function fetchGames(){
+function fetchGames(id){
     // REQUEST PARA BUSCAR DADOS DO LIMITE DE REQUEST DIARIO
+    const apiUrl = `https://v3.football.api-sports.io/fixtures?league=${id}&season=2023`;
+
     fetch(apiUrlVerify, {
         method: 'GET',
         headers: {
@@ -38,7 +39,7 @@ function fetchGames(){
         //Verfica se atingiu limite diario de requests
         if (currentRequests < maxRequests) {
             // REQUEST PARA BUSCAR DADOS DAS PARTIDAS
-            fetch(apiUrl, {
+            return fetch(apiUrl, {
                 method: 'GET',
                 headers: {
                     'x-rapidapi-key': apiKey,
@@ -52,7 +53,8 @@ function fetchGames(){
                 return res.json();
             })
             .then((data) => {
-                games = data.response;
+                games = games.concat(data.response);
+                return games
             })
             .catch((error) => {
                 console.error(error);
@@ -91,6 +93,17 @@ function displayGames(games) {
 }
 // //
 function createGameBox(game) {
+    let goalsHome = 0;
+    let goalsAway = 0;
+    if (game.goals.home == null || game.goals.away == null) {
+        goalsHome = ' ';
+        goalsAway = ' ';
+    } else {
+        goalsHome = game.goals.home;
+        goalsAway = game.goals.away;
+    }
+
+
     return `
         <div class="game-box">
             <div class="game-team-home">
@@ -100,7 +113,7 @@ function createGameBox(game) {
                 </div>
             </div>
             <div class="game-score">
-                ${game.goals.home} - ${game.goals.away}
+                ${goalsHome} - ${goalsAway}
             </div>
             <div class="game-team-away">
                 <img class="game-team-image" src="${game.teams.away.logo}" alt="Away">
@@ -117,7 +130,9 @@ function createGameBox(game) {
 document.addEventListener("DOMContentLoaded", function () {
     const dateButton = document.getElementById("date_picker_button");
     const liveButton = document.getElementById("live_picker_button");
-    fetchGames()
+    fetchGames('39')
+    fetchGames('2')
+    fetchGames('135')
 
     liveButton.addEventListener("click", function () {
         selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";

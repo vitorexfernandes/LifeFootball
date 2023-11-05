@@ -10,7 +10,7 @@
 :root{
     --backgroudColor:#F5EEC8;
     --mainColor: black;
-    --secondColor: #D0D4CA;
+    --secondColor: white;
     --thirdColor:#555843;
 
     --mainFont: 'Montserrat', sans-serif;
@@ -38,7 +38,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: var(--thirdColor);
-    opacity: .85;
+    opacity: .8;
 }
 
 .header-content {
@@ -136,11 +136,12 @@ body {
     color: var(--mainColor);
     font-size: auto; 
     margin-left: 2%;
+    font-size: 120%;
 }
 
 
 .game-team-image {
-    width: 20%;
+    width: 40%;
 }
 
 
