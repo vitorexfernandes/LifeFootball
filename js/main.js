@@ -1,75 +1,17 @@
-const containerGames= document.getElementById("mainContainer");
-console.log(containerGames);
-const selectedDateElement = document.getElementById("selectedDate");
 let currentRequests = null; // Inicialize com um valor padrão
 let maxRequests = null; // Inicialize com um valor padrão
 let games = [];
+const containerMainGames= document.getElementById("mainContainer");
+const containerGames= document.getElementById("game_container");
+const selectedDateElement = document.getElementById("selectedDate");
 const dataAtual = new Date();
-const apiUrlVerify = "https://v3.football.api-sports.io/status";
-const apiKey = '4c6222a3bb2b31400db5c2c97fadf279';
-
 
 
 selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
 
-
-
-function fetchGames(id){
-    // REQUEST PARA BUSCAR DADOS DO LIMITE DE REQUEST DIARIO
-    const apiUrl = `https://v3.football.api-sports.io/fixtures?league=${id}&season=2023`;
-
-    fetch(apiUrlVerify, {
-        method: 'GET',
-        headers: {
-            'x-rapidapi-key': apiKey,
-            'x-rapidapi-host': 'v3.football.api-sports.io'
-        }
-    })
-    .then((res) => {
-        if (!res.ok) {
-            throw new Error("Não foi possível obter os dados da API");
-        }
-        return res.json();
-    })
-    .then((data) => {
-        currentRequests = data.response.requests.current;
-        maxRequests = data.response.requests.limit_day;
-        console.log("Valor de 'current':", currentRequests);
-        console.log("Valor de 'limit':", maxRequests);
-
-        //Verfica se atingiu limite diario de requests
-        if (currentRequests < maxRequests) {
-            // REQUEST PARA BUSCAR DADOS DAS PARTIDAS
-            return fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'x-rapidapi-key': apiKey,
-                    'x-rapidapi-host': 'v3.football.api-sports.io'
-                }
-            })
-            .then((res) => {
-                if (!res.ok) {
-                    throw new Error("Não foi possível obter os dados da API");
-                }
-                return res.json();
-            })
-            .then((data) => {
-                games = games.concat(data.response);
-                return games
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-        }
-    })
-    .catch((error) => {
-        console.error(error);
-    });
-};
-
-
 function displayGamesByLeague(games) {
     containerGames.innerHTML = ''; // Limpa o conteúdo anterior
+    containerMainGames.innerHTML = ''; // Limpa o conteúdo anterior
     console.log('Displaying games...');
 
     if (!Array.isArray(games)) {
@@ -78,7 +20,6 @@ function displayGamesByLeague(games) {
     }
 
     const selectedDateElementText = selectedDateElement.textContent.split(" ")[0].trim();
-    const uniqueDates = new Set();
     const gamesByLeague = {};
 
     games.forEach((game) => {
@@ -93,24 +34,31 @@ function displayGamesByLeague(games) {
             }
 
             gamesByLeague[game.league.name].push(game);
-            uniqueDates.add(gameDateFormatted);
         }
     });
 
-    const uniqueDatesArray = Array.from(uniqueDates);
-
-    // Agora você tem os jogos separados por liga em gamesByLeague.
-    // Você pode percorrer esse objeto e exibir os jogos de cada liga.
-
     for (const leagueName in gamesByLeague) {
         if (gamesByLeague.hasOwnProperty(leagueName)) {
-            containerGames.innerHTML += `
-           <p class="league-title" id="selectedDate">${leagueName}</p>
-            `;
+
+            const leagueContainer = document.createElement('div');
+            leagueContainer.className = 'league-container';
+
+            const leagueTitle = document.createElement('p');
+            leagueTitle.className = 'league-title';
+            leagueTitle.id = 'selectedDate';
+            leagueTitle.textContent = leagueName;
+
+            leagueContainer.appendChild(leagueTitle);
+
             gamesByLeague[leagueName].forEach((game) => {
-                containerGames.innerHTML += createGameBox(game);
+                const gameBoxHTML = createGameBox(game);
+                const gameBoxElement = document.createElement('div');
+                gameBoxElement.innerHTML = gameBoxHTML;
+                leagueContainer.appendChild(gameBoxElement);
             });
-        }
+
+            containerMainGames.appendChild(leagueContainer);
+            }
     }
 }
 
@@ -128,7 +76,6 @@ function createGameBox(game) {
 
 
     return `    
-    <div class="game" id="game_container">
         <div class="game-box">
             <div class="game-team-home">
                 <img class="game-team-image" src="${game.teams.home.logo}" alt="Home">
@@ -146,7 +93,6 @@ function createGameBox(game) {
                 </div>
             </div>
         </div>
-     </div>
     `;
 }
 
@@ -155,9 +101,11 @@ function createGameBox(game) {
 document.addEventListener("DOMContentLoaded", function () {
     const dateButton = document.getElementById("date_picker_button");
     const liveButton = document.getElementById("live_picker_button");
-    fetchGames('39')
-    fetchGames('2')
-    fetchGames('135')
+    fetchGames('39',currentRequests,maxRequests)
+    fetchGames('2',currentRequests,maxRequests)
+    fetchGames('135',currentRequests,maxRequests)
+
+
 
     liveButton.addEventListener("click", function () {
         selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";

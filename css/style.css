@@ -110,7 +110,7 @@ body {
     color: var(--secondColor);
     text-decoration-color: var(--secondColor);
     background-color: var(--mainColor);
-    font-size: 10%;
+    font-size: 60%;
 }
 
 .game {
