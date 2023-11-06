@@ -1,21 +1,33 @@
-let currentRequests = null; // Inicialize com um valor padrão
-let maxRequests = null; // Inicialize com um valor padrão
+//Variables used to fetch data from the API via Java Script
+let currentRequests = null; 
+let maxRequests = null; 
+
+//Variable that will contain the JSON data
 let games = [];
+
+//Variables that search for HTML elements
 const containerMainGames= document.getElementById("mainContainer");
 const containerGames= document.getElementById("game_container");
 const selectedDateElement = document.getElementById("selectedDate");
+
+//Date Variables
 const dataAtual = new Date();
 
-
+//Select start date 
 selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
 
+
+
+
+
+//Function to show matches from each league
 function displayGamesByLeague(games) {
-    containerGames.innerHTML = ''; // Limpa o conteúdo anterior
-    containerMainGames.innerHTML = ''; // Limpa o conteúdo anterior
+    containerGames.innerHTML = ''; 
+    containerMainGames.innerHTML = ''; 
     console.log('Displaying games...');
 
     if (!Array.isArray(games)) {
-        console.error('Games não é um array:', games);
+        console.error('Games is not a array:', games);
         return;
     }
 
@@ -26,9 +38,10 @@ function displayGamesByLeague(games) {
         const dateParts = game.fixture.date.split('T')[0].split('-');
         const gameDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
         const gameDateFormatted = gameDate.toLocaleDateString();
-        console.log('Verificando data dos games...');
+        console.log('Checking game dates...');
+
         if (gameDateFormatted === selectedDateElementText) {
-            // Verifica se a liga já existe no objeto gamesByLeague, senão cria um novo array vazio.
+            //  Checks if the league already exists in the gamesByLeague object, otherwise creates a new empty array.
             if (!gamesByLeague[game.league.name]) {
                 gamesByLeague[game.league.name] = [];
             }
@@ -62,7 +75,7 @@ function displayGamesByLeague(games) {
     }
 }
 
-// //
+//Function to create game boxes 
 function createGameBox(game) {
     let goalsHome = 0;
     let goalsAway = 0;
@@ -97,22 +110,50 @@ function createGameBox(game) {
 }
 
 
-//EVENTO PARA BUSCAR O CALENDARIO
+
 document.addEventListener("DOMContentLoaded", function () {
     const dateButton = document.getElementById("date_picker_button");
     const liveButton = document.getElementById("live_picker_button");
-    fetchGames('39',currentRequests,maxRequests)
-    fetchGames('2',currentRequests,maxRequests)
-    fetchGames('135',currentRequests,maxRequests)
+
+    //When someone pays the API will be able to fetch the data directly.
+        //fetchGames('39',currentRequests,maxRequests)
+        //fetchGames('2',currentRequests,maxRequests)
+        //fetchGames('135',currentRequests,maxRequests)
+
+        
+    // Função para ler o arquivo JSON e fazer a análise
 
 
+    // Especifique o caminho para o arquivo local
+    const filePath = "../json/db.json";
 
+    function lerArquivoJSON() {
+        fetch(filePath)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                // Process the JSON data here
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Error fetching or parsing JSON:', error);
+            });
+    }
+    
+    lerArquivoJSON();
+
+
+    // LIVE BUTTON
     liveButton.addEventListener("click", function () {
         selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
         displayGamesByLeague(games);
     });
 
-
+    // DATE BUTTON
     flatpickr(dateButton, { dateFormat: "d-m-Y", onClose: 
             function (selectedDates) 
             {
