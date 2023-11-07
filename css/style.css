@@ -138,9 +138,10 @@ body {
     color: var(--secondColor);
     text-decoration-color: var(--secondColor);
     text-align: center;
-    background-color: var(--headerColorDark);
+    background: linear-gradient(to top, var(--headerColorDark), var(--headerColorLight));
     font-size: 150%;
     font-weight: bold;
+    opacity : 0.9;
 }
 
 /* General styles for the game elements */
@@ -152,9 +153,11 @@ body {
 }
 
 .game-box {
+    z-index: 1;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     border: 1px solid var(--mainColor);
+    background: linear-gradient(to top, var(--headerColorDark), var(--headerColorLight));
     justify-items: stretch;
     background-color: var(--thirdColor);
 }
