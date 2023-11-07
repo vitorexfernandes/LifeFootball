@@ -6,7 +6,7 @@ function fetchGames(id, currentRequests, maxRequests) {
     // Define the API endpoints and API key.
     const apiUrlVerify = "https://v3.football.api-sports.io/status";
     const apiUrl = `https://v3.football.api-sports.io/fixtures?league=${id}&season=2023`;
-    const apiKey = '4c6222a3bb2b31400db5c2c97fadf279';
+    const apiKey = 'XXXXXXXXXXXXXXXXXXXXX';
 
     // Check the API usage limits by sending a request to apiUrlVerify.
     fetch(apiUrlVerify, {
