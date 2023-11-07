@@ -1,23 +1,29 @@
+/* Import fonts from Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Krona+One&family=Montserrat:wght@400;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Agbalumo&display=swap');
 
-
+/* Reset default margin and border */
 * {
     margin: 0;
     border: 0;
-    }
-
-:root{
-    --backgroudColor:#F5EEC8;
-    --mainColor: black;
-    --secondColor: white;
-    --thirdColor:#555843;
-
-    --mainFont: 'Montserrat', sans-serif;
-    --secondFont: : "Brush Script MT", cursive;
-    --thirdFont: 'Agbalumo', sans-serif;
 }
 
+/* Define CSS variables for colors and fonts */
+:root {
+    --backgroundColor: #F5EEC8;
+    --mainColor: black;
+    --secondColor: white;
+    --thirdColor: #395399;
+    --headerColorDark: #1e2a78;
+    --headerColorLight: #2e3b89;
+
+    --mainFont: 'Montserrat', sans-serif;
+    --secondFont: "Brush Script MT", cursive;
+    --thirdFont: 'Agbalumo', sans-serif;
+    --headerFont: 'Krona One', sans-serif;
+}
+
+/* General styles for the body */
 body {
     margin: 0;
     padding: 0;
@@ -26,33 +32,50 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
-    /* background-color: var(--backgroudColor);*/
+    /* background-color: var(--backgroundColor); */
     color: var(--mainColor);
     box-sizing: border-box;
 }
 
-/* Estilos gerais do header
---------------------------------- */
+/* General styles for the header */
 .header {
+    position: relative;
     width: 100%;
     margin: 0;
     padding: 0;
-    background-color: var(--thirdColor);
-    opacity: .8;
 }
 
-.header-content {
-    display: flex; 
-    align-items: center;
-    justify-content: space-between
+/* Header background styles */
+.header-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, var(--headerColorDark), var(--headerColorLight));
+    opacity: 0.8; /* Set background opacity */
+    z-index: -1; /* Set lower z-index for the background */
 }
-.header-text{
-    font-family: var(--thirdFont);
+
+/* Header content styles */
+.header-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;;
+}
+
+/* Header text styles */
+.header-text {
+    font-family: var(--headerFont);
     font-size: 600%;
     color: var(--mainColor);
-    font-weight: bold; 
+    font-weight: bold;
+    margin-right: 20px;
 }
 
+/* Header image styles */
 .header-image {
     border: none;
     width: 100%;
@@ -61,15 +84,17 @@ body {
     margin-right: 10px;
 }
 
-.header-button-cointaner{
-    display: flex; 
-    margin: 0 15% 0 0;
+/* Header button container styles */
+.header-button-container {
+    display: flex;
+    margin: 0 10% 0 0;
 }
 
+/* Header button styles */
 .header-button {
     display: inline-block;
     padding: 5% 1%;
-    margin: 0 5% 0 20%;
+    margin: 0% 5% 0 10%;
     border: 1px solid var(--mainColor);
     border-radius: 20%;
     box-shadow: inset 0 0 2% 2% var(--thirdColor);
@@ -82,60 +107,60 @@ body {
     text-shadow: 0 1% 0 var(--thirdColor);
 }
 
-
+/* Header button hover styles */
 .header-button:hover {
-	background-color:var(--mainColor);
+    background-color: var(--mainColor);
 }
 
+/* Header button active styles */
 .header-button:active {
     background-color: var(--mainColor);
-  }
+}
 
-
-/* Estilos gerais do Pagina
---------------------------------- */
-.title-body{
+/* General styles for the page content */
+.title-body {
     margin: 1%;
     color: var(--secondColor);
     text-decoration-color: var(--secondColor);
     font-size: 250%;
 }
 
-.main-container{
+.main-container {
     margin: 1%;
 }
 
-.league-title{
-    margin: 1%;
-    color: var(--secondColor);
+.league-container{
+    margin: 2%;
+}
+
+.league-title {
+    margin: 0%;
+    color: var(--mainColor);
     text-decoration-color: var(--secondColor);
-    background-color: var(--mainColor);
-    font-size: 60%;
+    text-align: center;
+    background-color: var(--thirdColor);
+    font-size: 150%;
+    font-weight: bold;
 }
 
+/* General styles for the game elements */
 .game {
     margin: 1%;
-    display: grid; 
-    grid-template-columns: 1fr 1fr 1fr; 
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     justify-items: stretch;
-    gap: 10% 1%; 
+    gap: 10% 1%;
 }
-
 
 .game-box {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr; 
-    border: 1px solid var(--mainColor); 
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid var(--mainColor);
     justify-items: stretch;
     background-color: var(--thirdColor);
 }
 
-.game-team-home {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin: 0;
-}
+.game-team-home,
 .game-team-away {
     display: flex;
     align-items: center;
@@ -146,16 +171,14 @@ body {
 .game-team-name {
     font-family: var(--mainFont);
     color: var(--mainColor);
-    font-size: auto; 
+    font-size: auto;
     margin-left: 2%;
     font-size: 120%;
 }
 
-
 .game-team-image {
-    width: 20%;
+    width: 5%;
 }
-
 
 .game-score {
     font-family: var(--mainFont);
@@ -164,8 +187,7 @@ body {
     text-align: center;
 }
 
-/* Estilos gerais do footer
---------------------------------- */
+/* General styles for the footer */
 .footer {
     color: var(--secondColor);
     background-color: var(--thirdColor);
@@ -178,5 +200,5 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    opacity: .5;
+    opacity: 0.5;
 }

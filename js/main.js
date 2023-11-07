@@ -22,33 +22,42 @@ selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
 
 //Function to show matches from each league
 function displayGamesByLeague(games) {
-    containerGames.innerHTML = ''; 
-    containerMainGames.innerHTML = ''; 
+    containerGames.innerHTML = '';
+    containerMainGames.innerHTML = '';
     console.log('Displaying games...');
 
-    if (!Array.isArray(games)) {
-        console.error('Games is not a array:', games);
+    if (typeof games !== 'object') {
+        console.error('Games is not an object:', games);
         return;
     }
 
     const selectedDateElementText = selectedDateElement.textContent.split(" ")[0].trim();
     const gamesByLeague = {};
 
-    games.forEach((game) => {
-        const dateParts = game.fixture.date.split('T')[0].split('-');
-        const gameDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
-        const gameDateFormatted = gameDate.toLocaleDateString();
-        console.log('Checking game dates...');
+    // Separacao por liga
+    for (const gamesId in games) {
+        if (games.hasOwnProperty(gamesId)) {
+            const allGamesLeague = games[gamesId];
+            console.log('League...',allGamesLeague.parameters.league);
+            const responseArray = allGamesLeague.response;
 
-        if (gameDateFormatted === selectedDateElementText) {
-            //  Checks if the league already exists in the gamesByLeague object, otherwise creates a new empty array.
-            if (!gamesByLeague[game.league.name]) {
-                gamesByLeague[game.league.name] = [];
+            for (const game of responseArray) {
+                const dateParts = game.fixture.date.split('T')[0].split('-');
+                const gameDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
+                const gameDateFormatted = gameDate.toLocaleDateString();
+                console.log('Checking game dates...');
+
+                if (gameDateFormatted === selectedDateElementText) {
+                    // Checks if the league already exists in the gamesByLeague object, otherwise creates a new empty array.
+                    if (!gamesByLeague[game.league.name]) {
+                        gamesByLeague[game.league.name] = [];
+                    }
+    
+                    gamesByLeague[game.league.name].push(game);
+                }
             }
-
-            gamesByLeague[game.league.name].push(game);
         }
-    });
+    }
 
     for (const leagueName in gamesByLeague) {
         if (gamesByLeague.hasOwnProperty(leagueName)) {
@@ -71,9 +80,10 @@ function displayGamesByLeague(games) {
             });
 
             containerMainGames.appendChild(leagueContainer);
-            }
+        }
     }
 }
+
 
 //Function to create game boxes 
 function createGameBox(game) {
@@ -125,7 +135,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     // Especifique o caminho para o arquivo local
-    const filePath = "../json/db.json";
+    //const filePath = "../json/db.json";
+    const filePath = "http://localhost:5500/json/db.json"
 
     function lerArquivoJSON() {
         fetch(filePath)
@@ -137,6 +148,7 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(data => {
                 // Process the JSON data here
+                games = data;
                 console.log(data);
             })
             .catch(error => {
