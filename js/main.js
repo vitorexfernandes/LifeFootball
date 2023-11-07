@@ -7,7 +7,6 @@ let games = [];
 
 //Variables that search for HTML elements
 const containerMainGames= document.getElementById("mainContainer");
-const containerGames= document.getElementById("game_container");
 const selectedDateElement = document.getElementById("selectedDate");
 
 //Date Variables
@@ -18,12 +17,9 @@ selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
 
 
 
-
-
 //Function to show matches from each league
-function displayGamesByLeague(games) {
-    containerGames.innerHTML = '';
-    containerMainGames.innerHTML = '';
+function getGamesByDate(games) {
+    containerMainGames.innerHTML = ''; // Clear the main container
     console.log('Displaying games...');
 
     if (typeof games !== 'object') {
@@ -34,31 +30,32 @@ function displayGamesByLeague(games) {
     const selectedDateElementText = selectedDateElement.textContent.split(" ")[0].trim();
     const gamesByLeague = {};
 
-    // Separacao por liga
+    // Iterate through game data
     for (const gamesId in games) {
         if (games.hasOwnProperty(gamesId)) {
             const allGamesLeague = games[gamesId];
-            console.log('League...',allGamesLeague.parameters.league);
             const responseArray = allGamesLeague.response;
 
             for (const game of responseArray) {
                 const dateParts = game.fixture.date.split('T')[0].split('-');
                 const gameDate = new Date(dateParts[0], dateParts[1] - 1, dateParts[2]);
                 const gameDateFormatted = gameDate.toLocaleDateString();
-                console.log('Checking game dates...');
 
                 if (gameDateFormatted === selectedDateElementText) {
                     // Checks if the league already exists in the gamesByLeague object, otherwise creates a new empty array.
                     if (!gamesByLeague[game.league.name]) {
                         gamesByLeague[game.league.name] = [];
                     }
-    
                     gamesByLeague[game.league.name].push(game);
                 }
             }
         }
     }
+    return gamesByLeague
+}
 
+// Function through leagues and display games
+function getGamesByDateAndLeagues(gamesByLeague){
     for (const leagueName in gamesByLeague) {
         if (gamesByLeague.hasOwnProperty(leagueName)) {
 
@@ -72,17 +69,22 @@ function displayGamesByLeague(games) {
 
             leagueContainer.appendChild(leagueTitle);
 
+            const gameBoxElement = document.createElement('div');
+            gameBoxElement.classList.add('game-container');
+            
+
             gamesByLeague[leagueName].forEach((game) => {
                 const gameBoxHTML = createGameBox(game);
-                const gameBoxElement = document.createElement('div');
-                gameBoxElement.innerHTML = gameBoxHTML;
-                leagueContainer.appendChild(gameBoxElement);
+                gameBoxElement.innerHTML += gameBoxHTML;
             });
+
+            leagueContainer.appendChild(gameBoxElement);
 
             containerMainGames.appendChild(leagueContainer);
         }
     }
 }
+
 
 
 //Function to create game boxes 
@@ -97,7 +99,6 @@ function createGameBox(game) {
         goalsAway = game.goals.away;
     }
 
-
     return `    
         <div class="game-box">
             <div class="game-team-home">
@@ -110,59 +111,56 @@ function createGameBox(game) {
                 ${goalsHome} - ${goalsAway}
             </div>
             <div class="game-team-away">
-                <img class="game-team-image" src="${game.teams.away.logo}" alt="Away">
                 <div class="game-team-name">
                     ${game.teams.away.name}
                 </div>
+                <img class="game-team-image" src="${game.teams.away.logo}" alt="Away">
             </div>
         </div>
     `;
 }
 
-
+// Reading JSON file and parsing it
+function lerArquivoJSON(filePath) {
+    fetch(filePath)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Process the JSON data here
+            games = data;
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('Error fetching or parsing JSON:', error);
+        });
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     const dateButton = document.getElementById("date_picker_button");
     const liveButton = document.getElementById("live_picker_button");
 
-    //When someone pays the API will be able to fetch the data directly.
+    //When pays the API will be able to fetch the data directly.
         //fetchGames('39',currentRequests,maxRequests)
         //fetchGames('2',currentRequests,maxRequests)
         //fetchGames('135',currentRequests,maxRequests)
-
-        
-    // Função para ler o arquivo JSON e fazer a análise
-
-
-    // Especifique o caminho para o arquivo local
-    //const filePath = "../json/db.json";
+    
+    // Specify the path to the local file
+    // const filePath = "../json/db.json";
     const filePath = "http://localhost:5500/json/db.json"
 
-    function lerArquivoJSON() {
-        fetch(filePath)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();
-            })
-            .then(data => {
-                // Process the JSON data here
-                games = data;
-                console.log(data);
-            })
-            .catch(error => {
-                console.error('Error fetching or parsing JSON:', error);
-            });
-    }
-    
-    lerArquivoJSON();
 
+    lerArquivoJSON(filePath);
+    liveButton.click()
 
     // LIVE BUTTON
     liveButton.addEventListener("click", function () {
         selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
-        displayGamesByLeague(games);
+        gamesByLeague = getGamesByDate(games);
+        getGamesByDateAndLeagues(gamesByLeague)
     });
 
     // DATE BUTTON
@@ -172,10 +170,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (selectedDates.length > 0) 
                 {
                     selectedDateElement.textContent = selectedDates[0].toLocaleDateString() + " Games";
-                    displayGamesByLeague(games);
+                    gamesByLeague = getGamesByDate(games);
+                    getGamesByDateAndLeagues(gamesByLeague)
                 }
             }
         });
+    
+
 });
 
 
