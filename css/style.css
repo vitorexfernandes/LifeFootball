@@ -135,7 +135,7 @@ body {
 
 .league-title {
     margin: 0%;
-    color: var(--mainColor);
+    color: var(--secondColor);
     text-decoration-color: var(--secondColor);
     text-align: center;
     background-color: var(--headerColorDark);
@@ -174,7 +174,7 @@ body {
 
 .game-team-name {
     font-family: var(--mainFont);
-    color: var(--mainColor);
+    color: var(--secondColor);
     font-size: auto;
     margin-left: 1%;
     margin-right: 1%;
@@ -186,8 +186,9 @@ body {
 }
 
 .game-score {
+    font-weight: bold;
     font-family: var(--mainFont);
-    color: var(--mainColor);
+    color: var(--secondColor);
     font-size: 150%;
     text-align: center;
 }
