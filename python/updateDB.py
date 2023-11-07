@@ -48,7 +48,7 @@ for league_id in league_ids:
         print(f"Erro na solicitação para a liga {league_id}. Código de status: {response.status_code}")
 
 # Especifique o nome do arquivo onde você deseja salvar os dados JSON
-file_name = "fixtures.json"
+file_name = "db.json"
 
 # Salve os dados em formato JSON em um arquivo
 with open(file_name, 'w') as json_file:
