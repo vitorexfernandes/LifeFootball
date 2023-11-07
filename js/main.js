@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Specify the path to the local file
     // const filePath = "../json/db.json";
-    const filePath = "http://localhost:5500/json/db.json"
+    const filePath = "./json/db.json"
 
 
     lerArquivoJSON(filePath);
