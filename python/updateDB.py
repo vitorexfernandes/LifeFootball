@@ -6,7 +6,7 @@ import json
 # Set up the API request headers
 payload = {}
 headers = {
-  'x-rapidapi-key': '4c6222a3bb2b31400db5c2c97fadf279',
+  'x-rapidapi-key': 'KEY',
   'x-rapidapi-host': 'v3.football.api-sports.io'
 }
 
