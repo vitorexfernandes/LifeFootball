@@ -29,7 +29,7 @@ git clone https://github.com/your-username/live-football-app.git
 2. Navigate to the project directory:
 
 ## Usage
-- If you want to update game data, you need to run the pyhton updateDB.py code. Inside the code, you need to put the token in the 'x-rapidapi-key' variable: '4c6222a3bb2b31400db5c2c97fadf279',
+- If you want to update game data, you need to run the pyhton updateDB.py code. Inside the code, you need to put the token in the 'x-rapidapi-key' variable
 - Use the "LIVE" button to view live matches.
 - Use the "DATE" button to select a specific date and view matches for that date.
 
