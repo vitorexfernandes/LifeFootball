@@ -1,0 +1,81 @@
+
+
+/* General styles for the header */
+.banner {
+    position: relative;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+/* banner background styles */
+.banner-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--backgroundBannerColor);
+    /*background: linear-gradient(to top, var(--bannerColorDark), var(--bannerColorLight));*/
+    opacity: 0.3; /* Set background opacity */
+    z-index: -1; /* Set lower z-index for the background */
+}
+
+/* banner content styles */
+.banner-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;;
+}
+
+/* banner text styles */
+.banner-text {
+    font-family: var(--bannerFont);
+    font-size: 600%;
+    color: var(--mainColor);
+    font-weight: bold;
+    margin-right: 20px;
+}
+
+/* banner image styles */
+.banner-image {
+    border: none;
+    width: 100%;
+    max-width: 200px;
+    height: auto;
+    margin-right: 10px;
+}
+
+/* banner button container styles */
+.banner-button-container {
+    display: flex;
+    margin: 0 10% 0 0;
+}
+
+/* banner button styles */
+.banner-button {
+    display: inline-block;
+    padding: 5% 1%;
+    margin: 0% 5% 0 10%;
+    border: 1px solid var(--mainColor);
+    border-radius: 20%;
+    box-shadow: inset 0 0 2% 2% var(--thirdColor);
+    background-color: transparent;
+    color: var(--secondColor);
+    font-family: var(--mainFont);
+    font-size: 170%;
+    cursor: pointer;
+    text-decoration: none;
+    text-shadow: 0 1% 0 var(--thirdColor);
+}
+
+/* banner button hover styles */
+.banner-button:hover {
+    background-color: var(--mainColor);
+}
+
+/* banner button active styles */
+.banner-button:active {
+    background-color: var(--mainColor);
+}

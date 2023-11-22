@@ -1,0 +1,31 @@
+:root { --backgroundBannerColor: #F5EEC8;
+  --mainColor: black;
+  --secondColor: white;
+  --thirdColor: #395399;
+  --BannnerColorDark: #1e2a78;
+  --BannerColorLight: #2e3b89;
+
+  --mainFont: 'Montserrat', sans-serif;
+  --secondFont: "Brush Script MT", cursive;
+  --thirdFont: 'Agbalumo', sans-serif;
+  --headerFont: 'Krona One', sans-serif;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-image: url("../public/images/backg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
