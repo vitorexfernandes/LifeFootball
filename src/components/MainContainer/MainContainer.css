@@ -1,0 +1,15 @@
+
+
+/* General styles for the page content */
+.title-body {
+    margin: 1%;
+    color: var(--secondColor);
+    text-decoration-color: var(--secondColor);
+    font-size: 250%;
+}
+
+.main-container {
+    margin: 1%;
+}
+
+

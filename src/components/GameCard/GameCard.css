@@ -1,0 +1,51 @@
+/* General styles for the game elements */
+.game-container {
+    margin: 0.5%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1% 0.5%;
+}
+
+.game-box {
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid var(--mainColor);
+    background: linear-gradient(to top, var(--headerColorDark), var(--headerColorLight));
+    justify-items: stretch;
+    background-color: var(--thirdColor);
+}
+
+.game-team-home{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 0;
+}
+.game-team-away {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+}
+
+.game-team-name {
+    font-family: var(--mainFont);
+    color: var(--secondColor);
+    font-size: auto;
+    margin-left: 1%;
+    margin-right: 1%;
+    font-size: 90%;
+}
+
+.game-team-image {
+    width: 25%;
+}
+
+.game-score {
+    font-weight: bold;
+    font-family: var(--mainFont);
+    color: var(--secondColor);
+    font-size: 150%;
+    text-align: center;
+}

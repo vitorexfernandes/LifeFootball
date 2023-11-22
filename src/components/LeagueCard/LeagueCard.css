@@ -1,0 +1,13 @@
+.league-card{
+    margin: 2%;
+}
+
+.league-title {
+    margin: 0%;
+    color: var(--secondColor);
+    text-decoration-color: var(--secondColor);
+    text-align: left;
+    background: linear-gradient(to top, var(--BannnerColorDark), var(--BannerColorLight));
+    font-size: 150%;
+    font-weight: bold;
+}
