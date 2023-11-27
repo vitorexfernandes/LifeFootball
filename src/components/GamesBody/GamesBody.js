@@ -1,4 +1,5 @@
-import LeagueCard from '../LeagueCard'; // Remova as chaves { } aqui
+import React from 'react'
+import LeagueCard from '../LeagueCard'; 
 import './GamesBody.css'
 
 export const GamesBody = (props) => {

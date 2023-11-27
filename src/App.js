@@ -1,57 +1,38 @@
+import React, { useState } from 'react';
 import Banner from './components/Banner';
 import GamesBody from './components/GamesBody';
 
 
-
-
-
 function App() {
-  //Variables used to fetch data from the API via Java Script
-  let currentRequests = null; 
-  let maxRequests = null; 
+  const [showSelectionDate, setshowSelectionDate] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [showButton, setShowButton] = useState(true);
 
-  //Variable that will contain the JSON data
-  let games = [];
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    setshowSelectionDate(false);
+    setShowButton(true);
+  };
 
-  //Variables that search for HTML elements
-  const containerMainGames= document.getElementById("mainContainer");
-  const selectedDateElement = document.getElementById("selectedDate");
+  const toggleDatePicker = () => {
+    setshowSelectionDate((prev) => !prev);
+    setShowButton(false);
+  };
 
-  //Date Variables
-  const dataAtual = new Date();
-
-  //Select start date 
-  selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
-
-  document.addEventListener("DOMContentLoaded", function () {
-    const dateButton = document.getElementById("date_picker_button");
-    const liveButton = document.getElementById("live_picker_button");
-    
-    // LIVE BUTTON
-    liveButton.addEventListener("click", function () {
-        selectedDateElement.textContent = dataAtual.toLocaleDateString() + " Games";
-    });
-  
-    // DATE BUTTON
-    flatpickr(dateButton, { dateFormat: "d-m-Y", onClose: 
-            function (selectedDates) 
-            {
-                if (selectedDates.length > 0) 
-                {
-                    selectedDateElement.textContent = selectedDates[0].toLocaleDateString() + " Games";
-                }
-            }
-        }); 
-  });
 
   return (
     <div className="App">
-      <Banner />
-      <GamesBody  selectedDate={selectedDateElement.textContent} />
+      <Banner
+        toggleDatePicker={toggleDatePicker}
+        showButton={showButton}
+        showSelectionDate={showSelectionDate}
+        selectedDate={selectedDate}  // Pass selectedDate as a prop
+        handleDateChange={handleDateChange}  // Pass handleDateChange as a prop
+
+      />
+      <GamesBody selectedDate={selectedDate.toLocaleDateString() + " Games"} />
     </div>
   );
 }
 
 export default App;
-
-

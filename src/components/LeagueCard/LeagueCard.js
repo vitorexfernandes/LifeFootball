@@ -1,3 +1,4 @@
+import React from 'react'
 import GameCard from '../GameCard'; // Remova as chaves { } aqui
 
 import './LeagueCard.css'
