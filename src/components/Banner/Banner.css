@@ -16,13 +16,13 @@
     height: 100%;
     background: linear-gradient(to top, var(--BannnerColorDark), var(--BannerColorLight));
     opacity: 0.3; /* Set background opacity */
-    z-index: -2; /* Set lower z-index for the background */
+    z-index: -1; /* Set lower z-index for the background */
 }
 
 /* banner content styles */
 .banner-content {
     position: relative;
-    z-index: -1;
+    z-index: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;;
