@@ -74,15 +74,20 @@ function App() {
     setShowButton(false);
   };
 
+  const toggleLivePicker= ()=>{
+    setSelectedDate(new Date());
+  };
+
 
   return (
     <div className="App">
       <Banner
         toggleDatePicker={toggleDatePicker}
+        toggleLivePicker={toggleLivePicker}
         showButton={showButton}
         showSelectionDate={showSelectionDate}
-        selectedDate={selectedDate}  // Pass selectedDate as a prop
-        handleDateChange={handleDateChange}  // Pass handleDateChange as a prop
+        selectedDate={selectedDate}  
+        handleDateChange={handleDateChange}  
       />
       <GamesBody 
       selectedDate={selectedDate.toLocaleDateString()} 

@@ -30,9 +30,20 @@ print("Value of 'current':", current_value)
 fixture_data = {}
 
 # Define a list of league IDs for which you want to fetch fixtures
-league_ids = [2, 39, 135, 78, 61, 140]
+league_ids = [2,39,45,71,135,78,61,140,94,307,357]
+#2 - Champions League
+#39 - Premier League
+#45 - FA Cup
+#71 - Seria Brasileirao
+#135 - Seria A Italia
+#78 - Bundesliga
+#61 - Ligue 1
+#140 - La Liga
+#94 - Primeira Liga Portugal
+#307 - Saudi
+#357 - Ireland Premier Division
 
-# Loop pelas IDs de liga
+#  Loop pelas IDs de liga
 for league_id in league_ids:
     # Construa o endpoint da API para buscar fixtures para uma liga específica e temporada
     url = f"https://v3.football.api-sports.io/fixtures?league={league_id}&season=2023"

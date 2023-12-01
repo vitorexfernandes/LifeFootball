@@ -10,7 +10,7 @@ export const Banner = (props) => {
         <img className="banner-image" src="/images/banner.png" alt="banner Champions" />
         <div className="banner-text">Live Football</div>
         <div className="banner-button-container">
-        <button className="banner-button" id="live_picker_button">
+        <button className="banner-button" id="live_picker_button"  onClick={props.toggleLivePicker}>
           LIVE
         </button>
         {props.showButton && (
