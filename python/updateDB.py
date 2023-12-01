@@ -6,7 +6,7 @@ import json
 # Set up the API request headers
 payload = {}
 headers = {
-  'x-rapidapi-key': 'KEY',
+  'x-rapidapi-key': '4c6222a3bb2b31400db5c2c97fadf279',
   'x-rapidapi-host': 'v3.football.api-sports.io'
 }
 
@@ -27,10 +27,10 @@ limit_value = datacalls['response']['requests']['limit_day']
 print("Value of 'current':", current_value)
 
 # Create an empty list to store fixture data
-fixture_data = []
+fixture_data = {}
 
 # Define a list of league IDs for which you want to fetch fixtures
-idDasLeagues = ['2', '39', '135', '78', '61', '140']
+league_ids = [2, 39, 135, 78, 61, 140]
 
 # Loop pelas IDs de liga
 for league_id in league_ids:
