@@ -1,27 +1,22 @@
 import React from 'react'
 import './GameCard.css';
 
-export const GameCard = () => {
-  return (
-    <div className="game-box">
-            <div className="game-team-home">
-                <img className="game-team-image" src="/images/banner.png" alt="Home"/>
-                <div className="game-team-name">
-                    Manchester
-                </div>
-            </div>
-            <div className="game-score">
-                3-2
-            </div>
-            <div className="game-team-away">
-                <div className="game-team-name">
-                        Real
-                </div>
-                <img className="game-team-image" src="/images/banner.png" alt="Away"/>
-            </div>
+export const GameCard = (props) => {
+const { homeTeam, awayTeam, date, goals } = props;
+    return (
+        <div className="game-box">
+        <div className="game-team-home">
+            <img className="game-team-image" src={homeTeam.logo} alt={homeTeam.name} />
+            <div className="game-team-name">{homeTeam.name}</div>
         </div>
-  );
-}
+        <div className="game-score">{`${goals.home} - ${goals.away}`}</div>
+        <div className="game-team-away">
+            <div className="game-team-name">{awayTeam.name}</div>
+            <img className="game-team-image" src={awayTeam.logo} alt={awayTeam.name} />
+        </div>
+        </div>
+    );
+};
 
 
 

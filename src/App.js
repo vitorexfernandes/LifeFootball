@@ -55,13 +55,12 @@ function App() {
         });
   
         setFixtures(formattedFixtures);
-        console.log('Formatted Fixtures:', formattedFixtures);
+        console.log('Formatted Fixtures:', fixtures);
       })
       .catch((error) => {
-        console.error('Erro na requisição:', error);
+        console.error('Error:', error);
       });
   }, []);
-  
   
 
   const handleDateChange = (date) => {
@@ -84,9 +83,11 @@ function App() {
         showSelectionDate={showSelectionDate}
         selectedDate={selectedDate}  // Pass selectedDate as a prop
         handleDateChange={handleDateChange}  // Pass handleDateChange as a prop
-
       />
-      <GamesBody selectedDate={selectedDate.toLocaleDateString() + " Games"} />
+      <GamesBody 
+      selectedDate={selectedDate.toLocaleDateString()} 
+      fixtures = {fixtures}
+      />
     </div>
   );
 }
