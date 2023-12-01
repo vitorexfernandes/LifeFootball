@@ -7,9 +7,12 @@
     color: var(--fourthColor);
     text-decoration-color: var(--fourthColor);
     text-align: left;
-    background: linear-gradient(to top, var(--BannnerColorDark), var(--BannerColorLight));
-    font-size: 150%;
+    background: linear-gradient(to bottom, var(--secondColor), var(--mainColor));
+    font-size: 185%;
+    border-radius: 1%; 
+    overflow: hidden; 
     font-weight: bold;
+    text-align: center;
 }
 
 .league-container{
@@ -17,5 +20,6 @@
     flex-direction: row;
     flex-wrap:  wrap;
     justify-content: flex-start;
+    gap:0.3%;
     margin: 0% 0% 0% 0%;
 }

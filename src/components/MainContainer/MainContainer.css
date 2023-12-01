@@ -2,7 +2,7 @@
 
 /* General styles for the page content */
 .title-body {
-    margin: 1%;
+    margin: 0%0%0%1%;
     color: var(--fourthColor);
     text-decoration-color: var(--fourthColor);
     font-size: 250%;
@@ -10,6 +10,15 @@
 
 .main-container {
     margin: 0%;
+}
+
+.main-container-background {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, rgba(203, 228, 222, 0.1), rgba(203, 228, 222, 0.1));
+    min-height: 100vh;
 }
 
 

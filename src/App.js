@@ -1,6 +1,6 @@
 import React, { useState , useEffect  } from 'react';
 import Banner from './components/Banner';
-import GamesBody from './components/GamesBody';
+import MainContainer from './components/MainContainer/';
 
 
 
@@ -89,7 +89,7 @@ function App() {
         selectedDate={selectedDate}  
         handleDateChange={handleDateChange}  
       />
-      <GamesBody 
+      <MainContainer 
       selectedDate={selectedDate.toLocaleDateString()} 
       fixtures = {fixtures}
       />

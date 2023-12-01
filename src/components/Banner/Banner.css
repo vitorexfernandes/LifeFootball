@@ -14,8 +14,8 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: var(--backgroundBannerColor);
-    opacity: 0.95; /* Set background opacity */
+    background: linear-gradient(to top, var(--BannnerColorDark), var(--BannerColorLight));
+    opacity: 0.3; /* Set background opacity */
     z-index: -1; /* Set lower z-index for the background */
 }
 
@@ -61,7 +61,7 @@
     border-radius: 20%;
     box-shadow: inset 0 0 2% 2% var(--thirdColor);
     background-color: transparent;
-    color: var(--secondColor);
+    color: var(--fourthColor);
     font-family: var(--mainFont);
     font-size: 170%;
     cursor: pointer;
@@ -71,10 +71,10 @@
 
 /* banner button hover styles */
 .banner-button:hover {
-    background-color: var(--mainColor);
+    background-color: var(--thirdColor);
 }
 
 /* banner button active styles */
 .banner-button:active {
-    background-color: var(--mainColor);
+    background-color: var(--thirdColor);
 }
