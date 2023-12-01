@@ -10,15 +10,17 @@ export const LeagueCard = (props) => {
   return (
     <div key={leagueId} className='league-card'>
         <h1 className='league-title'>{leagueFixtures[0].league.name}</h1>
-        {leagueFixtures.map((fixture) => (
-              <GameCard
-                key={fixture.id}
-                homeTeam={fixture.homeTeam}
-                awayTeam={fixture.awayTeam}
-                date={fixture.date}
-                goals={fixture.goals}
-              />
-          ))}
+        <div className='league-container'>
+          {leagueFixtures.map((fixture) => (
+                <GameCard
+                  key={fixture.id}
+                  homeTeam={fixture.homeTeam}
+                  awayTeam={fixture.awayTeam}
+                  date={fixture.date}
+                  goals={fixture.goals}
+                />
+            ))}
+        </div>
     </div>
   );
 }
