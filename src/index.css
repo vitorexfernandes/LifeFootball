@@ -1,9 +1,10 @@
-:root { --backgroundBannerColor: #4E4FEB;
-  --mainColor: black;
-  --secondColor: #EEEEEE;
-  --thirdColor: #4E4FEB;
-  --BannnerColorDark: #4E4FEB;
-  --BannerColorLight: #068FFF;
+:root { --backgroundBannerColor: #2C3333;
+  --mainColor: #2C3333;
+  --secondColor: #2E4F4F;
+  --thirdColor: #0E8388;
+  --fourthColor: #CBE4DE;
+  --BannnerColorDark: #2C3333;
+  --BannerColorLight: #2E4F4F;
 
   --mainFont: 'Montserrat', sans-serif;
   --secondFont: "Brush Script MT", cursive;

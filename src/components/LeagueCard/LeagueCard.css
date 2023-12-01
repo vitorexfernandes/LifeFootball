@@ -1,11 +1,11 @@
 .league-card{
-    margin: 2%;
+    margin: 0.15%;
 }
 
 .league-title {
     margin: 0%;
-    color: var(--secondColor);
-    text-decoration-color: var(--secondColor);
+    color: var(--fourthColor);
+    text-decoration-color: var(--fourthColor);
     text-align: left;
     background: linear-gradient(to top, var(--BannnerColorDark), var(--BannerColorLight));
     font-size: 150%;
@@ -17,5 +17,5 @@
     flex-direction: row;
     flex-wrap:  wrap;
     justify-content: flex-start;
-    margin: 0.2% 0% 1% 1%;
+    margin: 0% 0% 0% 0%;
 }

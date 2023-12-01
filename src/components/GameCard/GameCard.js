@@ -2,7 +2,7 @@ import React from 'react'
 import './GameCard.css';
 
 export const GameCard = (props) => {
-const { homeTeam, awayTeam, date, goals } = props;
+const { homeTeam, awayTeam,  goals } = props;
 const homeGoals = goals.home ?? '';
 const awayGoals = goals.away ?? '';
     return (

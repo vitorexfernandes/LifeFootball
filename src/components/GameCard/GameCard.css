@@ -7,7 +7,7 @@
     align-items: center;
     justify-content:space-between;
     border: 1px solid var(--mainColor);
-    background: linear-gradient(to top, var(--headerColorDark), var(--headerColorLight));
+    background: linear-gradient(to top, var(--fourthColor), var(--fourthColor));
     background-color: var(--thirdColor);
     margin: 0;
 }
@@ -39,8 +39,10 @@
 }
 
 .game-team-image {
-    width: 20%;
-    height: auto;
+    width: 15%;
+    height: auto; /* Alterado para 'auto' para manter a proporção da imagem */
+    max-width: 100%; /* Adicionado para garantir que a imagem não ultrapasse 15% da largura do contêiner */
+    max-height: 50%; /* Adicionado para garantir que a imagem não ultrapasse 10% da altura do contêiner */
 }
 
 .game-score {

@@ -3,8 +3,8 @@
 /* General styles for the page content */
 .title-body {
     margin: 1%;
-    color: var(--secondColor);
-    text-decoration-color: var(--secondColor);
+    color: var(--fourthColor);
+    text-decoration-color: var(--fourthColor);
     font-size: 250%;
 }
 
