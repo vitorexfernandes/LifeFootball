@@ -8,7 +8,7 @@ export const Banner = (props) => {
       <div className="banner-background"></div>
       <div className="banner-content">
         <img className="banner-image" src="/images/Banner.png" alt="banner Champions" />
-        <div className="banner-text">Live Football</div>
+        <div className="banner-text">Life Football</div>
         <div className="banner-button-container">
         <button className="banner-button" id="live_picker_button"  onClick={props.toggleLivePicker}>
           LIVE
