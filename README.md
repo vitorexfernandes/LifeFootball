@@ -1,6 +1,6 @@
-# Live Football App
+# Life Football App
 
-This is a simple web application for displaying live football match information. The app fetches data from a football API and allows users to view live matches and matches from a selected date.
+This is a simple web application for displaying life football match information. The app fetches data from a football API and allows users to view live matches and matches from a selected date.
 
 ## Table of Contents
 
